@@ -5,15 +5,9 @@ requests==2.31.0
 python-dotenv==1.0.1
 pydantic==2.6.4
 
-# 🔥 Stable LangChain (IMPORTANT - prevents your import errors)
 langchain==0.1.16
 langchain-core==0.1.45
 langchain-community==0.0.34
-
-# LLM providers
 langchain-openai==0.1.7
 langchain-groq==0.1.5
 openai==1.30.0
-
-# Frontend (optional but you are using it)
-streamlit==1.33.0
