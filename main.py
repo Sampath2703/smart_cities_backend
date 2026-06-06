@@ -105,24 +105,27 @@ class Query(BaseModel):
 
 @app.post("/analyze")
 def analyze(data: Query):
-    if not data.city:
-        raise HTTPException(status_code=400, detail="City required")
+    try:
+        if not data.city:
+            raise HTTPException(status_code=400, detail="City required")
 
-    query = f"""
+        query = f"""
 City: {data.city}
 Module: {data.module}
 Question: {data.question}
 Use tools: traffic_tool, weather_tool, parking_tool, pothole_tool
 """
 
-    result = agent_executor.invoke({"input": query})
+        result = agent_executor.invoke({"input": query})
 
-    return {
-        "city": data.city,
-        "module": data.module,
-        "analysis": result["output"]
-    }
+        return {
+            "city": data.city,
+            "module": data.module,
+            "analysis": result.get("output", "No output returned")
+        }
 
-@app.get("/")
-def home():
-    return {"status": "Smart City Running"}
+    except Exception as e:
+        return {
+            "error": str(e),
+            "analysis": "Backend crashed"
+        }
