@@ -106,14 +106,10 @@ class Query(BaseModel):
 @app.post("/analyze")
 def analyze(data: Query):
     try:
-        if not data.city:
-            raise HTTPException(status_code=400, detail="City required")
-
         query = f"""
 City: {data.city}
 Module: {data.module}
 Question: {data.question}
-Use tools: traffic_tool, weather_tool, parking_tool, pothole_tool
 """
 
         result = agent_executor.invoke({"input": query})
@@ -121,11 +117,11 @@ Use tools: traffic_tool, weather_tool, parking_tool, pothole_tool
         return {
             "city": data.city,
             "module": data.module,
-            "analysis": result.get("output", "No output returned")
+            "analysis": result["output"]
         }
 
     except Exception as e:
         return {
             "error": str(e),
-            "analysis": "Backend crashed"
+            "analysis": str(e)
         }
