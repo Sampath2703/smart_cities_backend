@@ -20,7 +20,8 @@ WEATHER_KEY = os.getenv("WEATHER_API_KEY")
 llm = ChatOpenAI(
     model="gpt-4o",
     temperature=0,
-    api_key=os.getenv("OPEN_API_KEY")
+    api_key=os.getenv("OPEN_API_KEY"),
+    http_client=None
 )
 
 @tool
