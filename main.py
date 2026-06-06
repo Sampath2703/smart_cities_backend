@@ -15,7 +15,7 @@ app = FastAPI(title="Smart City Multi Agent")
 
 TOMTOM_KEY = os.getenv("TOMTOM_API_KEY")
 WEATHER_KEY = os.getenv("WEATHER_API_KEY")
-OPENAI_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_KEY = os.getenv("OPEN_API_KEY")
 
 llm = ChatOpenAI(
     model="gpt-4o",
