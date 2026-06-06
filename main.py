@@ -21,6 +21,7 @@ llm = ChatOpenAI(
     model="gpt-4o",
     temperature=0,
     api_key=os.getenv("OPEN_API_KEY")
+)
 
 @tool
 def traffic_tool(city: str):
