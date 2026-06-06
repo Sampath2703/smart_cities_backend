@@ -16,7 +16,6 @@ app = FastAPI(title="Smart City Multi Agent")
 TOMTOM_KEY = os.getenv("TOMTOM_API_KEY")
 WEATHER_KEY = os.getenv("WEATHER_API_KEY")
 
-
 llm = ChatOpenAI(
     model="gpt-4o",
     temperature=0,
@@ -26,6 +25,7 @@ llm = ChatOpenAI(
 
 @tool
 def traffic_tool(city: str):
+    """Get real-time traffic speed and congestion data."""
     try:
         url = "https://api.tomtom.com/traffic/services/4/flowSegmentData/relative0/10/json"
         params = {"key": TOMTOM_KEY, "point": "17.3850,78.4867"}
@@ -35,10 +35,11 @@ def traffic_tool(city: str):
             return f"Speed {data['currentSpeed']} km/h | FreeFlow {data['freeFlowSpeed']} km/h"
     except:
         pass
-    return "Traffic: fallback"
+    return "Traffic fallback"
 
 @tool
 def weather_tool(city: str):
+    """Get current weather data for a city."""
     try:
         url = "https://api.openweathermap.org/data/2.5/weather"
         params = {"q": city, "appid": WEATHER_KEY, "units": "metric"}
@@ -52,6 +53,7 @@ def weather_tool(city: str):
 
 @tool
 def parking_tool(city: str):
+    """Get parking availability using OpenStreetMap."""
     try:
         query = """
         [out:json];
@@ -69,6 +71,7 @@ def parking_tool(city: str):
 
 @tool
 def pothole_tool(city: str):
+    """Estimate pothole severity."""
     try:
         query = """
         [out:json];
@@ -79,7 +82,7 @@ def pothole_tool(city: str):
         r = requests.get(url, params={"data": query})
         if r.status_code == 200:
             roads = len(r.json().get("elements", []))
-            return f"Potholes: {int(roads * 0.02)} | Severity medium"
+            return f"Potholes: {int(roads * 0.02)} | Severity: Medium"
     except:
         pass
     return "Potholes fallback"
