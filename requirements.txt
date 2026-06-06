@@ -1,13 +1,11 @@
 fastapi==0.110.0
 uvicorn==0.27.1
-
 requests==2.31.0
 python-dotenv==1.0.1
-pydantic==2.6.4
+pydantic==2.7.4
 
-langchain==0.1.17
-langchain-core==0.1.46
-langchain-community==0.0.38
-langchain-openai==0.1.8
-langchain-groq==0.1.5
-openai==1.30.0
+langchain==0.2.11
+langchain-core==0.2.33
+langchain-openai==0.1.7
+langchain-community==0.2.10
+openai==1.40.0
