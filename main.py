@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 import requests
 from pydantic import BaseModel
 from dotenv import load_dotenv
-
+import os
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import tool
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -11,12 +11,13 @@ load_dotenv()
 
 app = FastAPI(title="Smart City Multi Agent")
 
-TOMTOM_KEY = "VRhvDH64wjOCnRlfHdDAye3MmILnOFTE"
-WEATHER_KEY = "6535731cfb0fa2b427d26fc52f989cfe"
+TOMTOM_KEY = os.getenv("TOMTOM_API_KEY")
+WEATHER_KEY = os.getenv("WEATHER_API_KEY")
 
 llm = ChatOpenAI(
     model="gpt-4o",
-    temperature=0
+    temperature=0,
+    open_ai_key = os.getenv("OPEN_API_KEY")
 )
 
 
