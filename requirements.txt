@@ -7,19 +7,19 @@ python-dotenv==1.0.1
 openai==1.30.0
 httpx==0.27.0
 
-# ✅ LangChain stable working combo
+# ✅ LangChain compatible set
 langchain==0.2.17
-langchain-core==0.2.23
+langchain-core==0.2.43
 langchain-community==0.2.11
 langchain-openai==0.1.8
 langchain-text-splitters==0.2.4
 
-# Dependencies (safe ranges)
-pydantic>=2.7,<3.0
-SQLAlchemy>=2.0,<3.0
+# Dependencies
+pydantic<3.0,>=2.7
+SQLAlchemy<3.0,>=2.0
 PyYAML>=6.0
-numpy>=1.26,<2.0
+numpy<2.0,>=1.26
 tqdm>=4.66
-tenacity>=8.2,<9.0
-aiohttp>=3.8,<4.0
+tenacity<9.0,>=8.2
+aiohttp<4.0,>=3.8
 typing-extensions>=4.8
